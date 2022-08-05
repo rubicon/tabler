@@ -9,7 +9,7 @@ A premium and open source dashboard template with a responsive and high-quality 
 <a href="https://preview.tabler.io" target="__blank"><img src="https://img.shields.io/static/v1?label=Demo&message=preview&color=228be6" alt="Tabler preview"></a>
 <a href="https://github.com/tabler/tabler/blob/master/LICENSE"><img src="https://img.shields.io/npm/l/tabler.svg?label=License&message=MIT&color=1c7ed6" alt="License"></a>
 <a href="https://github.com/tabler/tabler/archive/dev.zip" target="__blank"><img src="https://img.shields.io/static/v1?label=Download&message=ZIP&color=339af0" alt="Tabler preview"></a>
-<a href="https://github.com/tabler/tabler/actions/workflows/preview.yml" target="__blank"><img alt="GitHub stars" src="https://github.com/tabler/tabler/actions/workflows/preview.yml/badge.svg"></a>
+<a href="https://github.com/tabler/tabler/actions/workflows/test.yml" target="__blank"><img alt="Test build" src="https://github.com/tabler/tabler/actions/workflows/test.yml/badge.svg"></a>
 <a href="https://github.com/tabler/tabler" target="__blank"><img alt="GitHub stars" src="https://img.shields.io/github/stars/tabler/tabler?style=social"></a>
 </p>
 
@@ -29,7 +29,7 @@ Tabler is fully responsive and compatible with all modern browsers. Thanks to it
 
 ## Features
 
-We've created this admin panel for everyone who wants to create templates based on our pre-made components. Our mission is to deliver a user-friendly, clear and easy administration panel that can be used by both simple websites and sophisticated systems. The only requirement is basic HTML and CSS (and some [Liquid](https://github.com/Shopify/liquid/wiki)) knowledge — as a reward, you'll be able to manage and visualise different types of data in the easiest possible way!
+We've created this admin panel for everyone who wants to create templates based on our pre-made components. Our mission is to deliver a user-friendly, clear and easy administration panel that can be used by both simple websites and sophisticated systems. The only requirement is basic HTML and CSS (and some [Liquid](https://github.com/Shopify/liquid/wiki)) knowledge — as a reward, you'll be able to manage and visualize different types of data in the easiest possible way!
 
 * **Responsive:** With the support for mobile, tablet and desktop displays, it doesn’t matter what device you’re using. Tabler is responsive in all major browsers.
 * **Cross Browser:** Our theme works perfectly with the latest Chrome, Firefox+, latest Safari, Opera, Edge and mobile browsers. We work hard to to provide continuous support for them.
@@ -130,13 +130,13 @@ All files included in `@tabler/core` npm package are available over a CDN.
 #### Javascript
 
 ```html
-<script src="https://unpkg.com/@tabler/core@latest/dist/js/tabler.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
 ```
 
 #### Styles
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/@tabler/core@latest/dist/css/tabler.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css">
 ```
 
 ## Feature requests
