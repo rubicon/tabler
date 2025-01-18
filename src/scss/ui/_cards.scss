@@ -1,7 +1,4 @@
 .card {
-  box-shadow: $card-shadow;
-  border: $card-border-width solid $card-border-color;
-  background: var(--#{$variable-prefix}card-bg, #{$card-bg});
   @include transition(transform $transition-time ease-out, opacity $transition-time ease-out, box-shadow $transition-time ease-out);
 
   @media print {
@@ -14,7 +11,7 @@
 
     &:hover {
       text-decoration: none;
-      box-shadow: $card-shadow-hover;
+      box-shadow: $box-shadow-card-hover;
     }
   }
 
@@ -34,42 +31,42 @@
 
 // Card stamp
 .card-stamp {
-  --stamp-size: 7rem;
+  --#{$prefix}stamp-size: 7rem;
   position: absolute;
   top: 0;
   right: 0;
-  width: calc(var(--stamp-size) * 1);
-  height: calc(var(--stamp-size) * 1);
+  width: calc(var(--#{$prefix}stamp-size) * 1);
+  height: calc(var(--#{$prefix}stamp-size) * 1);
   max-height: 100%;
   border-top-right-radius: $border-radius;
+  opacity: $card-stamp-opacity;
   overflow: hidden;
   pointer-events: none;
 }
 
 .card-stamp-lg {
-  --stamp-size: 13rem;
+  --#{$prefix}stamp-size: 13rem;
 }
 
 .card-stamp-icon {
-  background: $text-muted;
-  color: $white;
+  background: var(--#{$prefix}secondary);
+  color: var(--#{$prefix}card-bg, var(--#{$prefix}bg-surface));
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: $border-radius-pill;
-  width: calc(var(--stamp-size) * 1);
-  height: calc(var(--stamp-size) * 1);
+  width: calc(var(--#{$prefix}stamp-size) * 1);
+  height: calc(var(--#{$prefix}stamp-size) * 1);
   position: relative;
-  top: calc(var(--stamp-size) * -.25);
-  right: calc(var(--stamp-size) * -.25);
-  font-size: calc(var(--stamp-size) * .75);
+  top: calc(var(--#{$prefix}stamp-size) * -.25);
+  right: calc(var(--#{$prefix}stamp-size) * -.25);
+  font-size: calc(var(--#{$prefix}stamp-size) * .75);
   transform: rotate(10deg);
-  opacity: .075;
 
   .icon {
     stroke-width: 2;
-    width: calc(var(--stamp-size) * .75);
-    height: calc(var(--stamp-size) * .75);
+    width: calc(var(--#{$prefix}stamp-size) * .75);
+    height: calc(var(--#{$prefix}stamp-size) * .75);
   }
 }
 
@@ -104,20 +101,8 @@
 }
 
 .card-active {
-  position: relative;
-  background-color: rgba($primary, .03);
-  z-index: 1;
-
-  &:before {
-    position: absolute;
-    top: -1px;
-    right: -1px;
-    bottom: -1px;
-    left: -1px;
-    content: "";
-    border: 1px solid $primary;
-    border-radius: inherit;
-  }
+  --#{$prefix}card-border-color: var(--#{$prefix}primary);
+  --#{$prefix}card-bg: var(--#{$prefix}active-bg);
 }
 
 .card-btn {
@@ -127,10 +112,10 @@
   padding: $card-spacer-y $card-spacer-x;
   text-align: center;
   @include transition(background $transition-time);
-  border-top: 1px solid var(--#{$variable-prefix}border-color);
+  border-top: var(--#{$prefix}border-width) var(--#{$prefix}border-style) var(--#{$prefix}border-color);
   flex: 1;
   color: inherit;
-  font-weight: $font-weight-medium;
+  font-weight: var(--#{$prefix}font-weight-medium);
 
   &:hover {
     text-decoration: none;
@@ -138,23 +123,27 @@
   }
 
   & + & {
-    border-left: 1px solid var(--#{$variable-prefix}border-color);
+    border-left: var(--#{$prefix}border-width) var(--#{$prefix}border-style) var(--#{$prefix}border-color);
   }
 }
 
+/**
+Stacked card
+ */
 .card-stacked {
+  --#{$prefix}card-stacked-offset: .25rem;
   position: relative;
 
   &:after {
     position: absolute;
-    top: -5px;
-    right: 5px;
-    left: 5px;
-    height: 5px;
+    top: calc(-1 * var(--#{$prefix}card-stacked-offset));
+    right: var(--#{$prefix}card-stacked-offset);
+    left: var(--#{$prefix}card-stacked-offset);
+    height: var(--#{$prefix}card-stacked-offset);
     content: "";
-    background: $card-bg;
-    border: 1px solid $card-border-color;
-    border-radius: $card-border-radius $card-border-radius 0 0;
+    background: var(--#{$prefix}card-bg, var(--#{$prefix}bg-surface));
+    border: var(--#{$prefix}border-width) var(--#{$prefix}border-style) var(--#{$prefix}card-border-color);
+    border-radius: var(--#{$prefix}card-border-radius) var(--#{$prefix}card-border-radius) 0 0;
   }
 }
 
@@ -200,16 +189,22 @@
   display: flex;
   align-items: center;
   background: transparent;
+
+  &:first-child {
+    border-radius: var(--#{$prefix}card-border-radius) var(--#{$prefix}card-border-radius) 0 0;
+  }
 }
 
 .card-header-light {
   border-bottom-color: transparent;
-  background: var(--#{$variable-prefix}light);
+  background: var(--#{$prefix}bg-surface-tertiary);
 }
 
 .card-header-tabs {
+  background: $card-header-tabs-bg;
   flex: 1;
-  margin: (- $card-spacer-y * .5) (- $card-spacer-x * .5) (- $card-spacer-y );
+  margin: calc(var(--#{$prefix}card-cap-padding-y) * -1) calc(var(--#{$prefix}card-cap-padding-x) * -1) calc(var(--#{$prefix}card-cap-padding-y) * -1);
+  padding: calc(var(--#{$prefix}card-cap-padding-y) * .5) calc(var(--#{$prefix}card-cap-padding-x) * .5) 0;
 }
 
 .card-header-pills {
@@ -251,12 +246,20 @@
 // Card footer
 .card-footer {
   margin-top: auto;
+
+  &:last-child {
+    border-radius: 0 0 var(--#{$prefix}card-border-radius) var(--#{$prefix}card-border-radius);
+  }
 }
 
 .card-footer-transparent {
   background: transparent;
   border-color: transparent;
   padding-top: 0;
+}
+
+.card-footer-borderless {
+  border-top: none;
 }
 
 // Card progress
@@ -273,14 +276,14 @@
 }
 
 .card-meta {
-  color: $text-muted;
+  color: var(--#{$prefix}secondary);
 }
 
 .card-title {
   display: block;
   margin: 0 0 1rem;
   font-size: $h3-font-size;
-  font-weight: $font-weight-medium;
+  font-weight: var(--#{$prefix}font-weight-medium);
   color: $headings-color;
   line-height: 1.5rem;
 
@@ -294,9 +297,8 @@
 }
 
 .card-subtitle {
-  margin-top: divide(-$card-spacer-y, 2);
   margin-bottom: $card-title-spacer-y;
-  color: $text-muted;
+  color: var(--#{$prefix}secondary);
   font-weight: normal;
 
   .card-header & {
@@ -310,12 +312,14 @@
 }
 
 .card-body {
+  position: relative;
+
   > :last-child {
     margin-bottom: 0;
   }
 
   .card-sm > & {
-    padding: .75rem;
+    padding: 1rem;
   }
 
   .card-md > & {
@@ -339,7 +343,7 @@
   }
 
   & + & {
-    border-top: 1px solid $border-color;
+    border-top: var(--#{$prefix}border-width) var(--#{$prefix}border-style) var(--#{$prefix}border-color);
   }
 }
 
@@ -361,7 +365,7 @@ Card optinos
   display: inline-block;
   min-width: 1rem;
   margin-left: .25rem;
-  color: $text-muted;
+  color: var(--#{$prefix}secondary);
 }
 
 
@@ -374,7 +378,7 @@ Card status
   right: 0;
   left: 0;
   height: $card-status-size;
-  border-radius: $card-border-radius $card-border-radius 0 0;
+  border-radius: var(--#{$prefix}card-border-radius) var(--#{$prefix}card-border-radius) 0 0;
 }
 
 .card-status-start {
@@ -383,7 +387,7 @@ Card status
   bottom: 0;
   width: $card-status-size;
   height: 100%;
-  border-radius: $card-border-radius 0 0 $card-border-radius;
+  border-radius: var(--#{$prefix}card-border-radius) 0 0 var(--#{$prefix}card-border-radius);
 }
 
 .card-status-bottom {
@@ -392,7 +396,7 @@ Card status
   bottom: 0;
   width: 100%;
   height: $card-status-size;
-  border-radius: 0 0 $card-border-radius $card-border-radius;
+  border-radius: 0 0 var(--#{$prefix}card-border-radius) var(--#{$prefix}card-border-radius);
 }
 
 /**
@@ -402,30 +406,27 @@ Card table
   margin-bottom: 0 !important;
 
   tr {
-    .card-header ~ .table-responsive &,
-    .card-header ~ & {
-      &:first-child td {
-        //border-top: 0;
-      }
-    }
-
     td,
     th {
-      //border-top: 1px solid $border-color;
-
       &:first-child {
         padding-left: $card-spacer-x;
+        border-left: 0;
       }
 
       &:last-child {
         padding-right: $card-spacer-x;
+        border-right: 0;
       }
     }
   }
 
-  thead {
+  thead,
+  tbody,
+  tfoot {
     tr {
       &:first-child {
+        border-top: 0;
+
         td,
         th {
           border-top: 0;
@@ -434,17 +435,8 @@ Card table
     }
   }
 
-  tbody {
-    tr:last-child {
-      td,
-      th {
-        border-bottom: 0;
-      }
-    }
-  }
-
   .card-body + & {
-    border-top: 1px solid $border-color;
+    border-top: var(--#{$prefix}border-width) var(--#{$prefix}border-style) var(--#{$prefix}table-border-color);
   }
 }
 
@@ -480,8 +472,8 @@ Card avatar
 .card-avatar {
   margin-left: auto;
   margin-right: auto;
-  box-shadow: 0 0 0 .25rem $card-bg;
-  margin-top: calc(-1 * calc(var(--#{$variable-prefix}avatar-size) * .5));
+  box-shadow: 0 0 0 .25rem var(--#{$prefix}card-bg, var(--#{$prefix}bg-surface));
+  margin-top: calc(-1 * calc(var(--#{$prefix}avatar-size) * .5));
 }
 
 /*
@@ -489,7 +481,7 @@ Card list group
  */
 .card-list-group {
   .card-body + & {
-    border-top: 1px solid $border-color;
+    border-top: var(--#{$prefix}border-width) var(--#{$prefix}border-style) var(--#{$prefix}border-color);
   }
 
   .list-group-item {
@@ -511,27 +503,25 @@ Card list group
 
 // Card tabs
 .card-tabs {
-
   .nav-tabs {
     position: relative;
     z-index: $zindex-dropdown;
     border-bottom: 0;
 
     .nav-link {
-      color: $text-muted;
       background: $card-cap-bg;
-      border: $card-border-width solid $card-border-color;
+      border: $card-border-width var(--#{$prefix}border-style) $card-border-color;
 
       &.active,
       &:active,
       &:hover {
         border-color: $card-border-color;
-        color: $body-color;
+        color: var(--#{$prefix}body-color);
       }
 
       &.active {
         color: $headings-color;
-        background: $card-bg;
+        background: var(--#{$prefix}card-bg, var(--#{$prefix}bg-surface));
         border-bottom-color: transparent;
       }
     }
@@ -550,7 +540,7 @@ Card list group
       }
 
       + .nav-item {
-        margin-left: -1px;
+        margin-left: calc(-1 * #{$card-border-width});
       }
     }
   }
@@ -567,20 +557,38 @@ Card list group
     }
 
     .nav-item {
-      margin-top: -$card-border-width;
+      margin-top: calc(-1 * #{$card-border-width});
       margin-bottom: 0;
 
       .nav-link {
-        border-bottom: $card-border-width solid $card-border-color;
+        border-bottom: $card-border-width var(--#{$prefix}border-style) $card-border-color;
+        border-radius: 0 0 $card-border-radius $card-border-radius;
+      }
 
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
+      &:not(:first-child) .nav-link {
+        border-bottom-left-radius: 0;
+      }
+
+      &:not(:last-child) .nav-link {
+        border-bottom-right-radius: 0;
       }
     }
   }
 
   .card {
-    margin: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .nav-tabs + .tab-content .card {
+    border-bottom-left-radius: var(--#{$prefix}card-border-radius);
     border-top-left-radius: 0;
   }
+}
+
+/**
+Card note
+*/
+.card-note {
+  --#{$prefix}card-bg: #fff7dd;
+  --#{$prefix}card-border-color: #fff1c9;
 }

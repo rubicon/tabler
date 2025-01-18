@@ -1,9 +1,5 @@
-.offcanvas {
-  background: var(--#{$variable-prefix}card-bg);
-}
-
 .offcanvas-header {
-  border-bottom: 1px solid $border-color-transparent;
+  border-bottom: var(--#{$prefix}border-width) var(--#{$prefix}border-style) $border-color-translucent;
 }
 
 .offcanvas-footer {
@@ -12,7 +8,7 @@
 
 .offcanvas-title {
   font-size: $h3-font-size;
-  font-weight: $font-weight-medium;
+  font-weight: var(--#{$prefix}font-weight-medium);
   line-height: 1.5rem;
 }
 

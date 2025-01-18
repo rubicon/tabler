@@ -1,25 +1,27 @@
 // Setting items
 const items = {
-	'theme': { localStorage: 'tablerTheme', default: 'light' },
-	'menu-position': { localStorage: 'tablerMenuPosition', default: 'top' },
-	'menu-behavior': { localStorage: 'tablerMenuBehavior', default: 'sticky' },
-	'container-layout': { localStorage: 'tablerContainerLayout', default: 'boxed' }
+	"menu-position": { localStorage: "tablerMenuPosition", default: "top" },
+	"menu-behavior": { localStorage: "tablerMenuBehavior", default: "sticky" },
+	"container-layout": {
+		localStorage: "tablerContainerLayout",
+		default: "boxed",
+	},
 }
 
 // Theme config
 const config = {}
 for (const [key, params] of Object.entries(items)) {
-   const lsParams = localStorage.getItem(params.localStorage)
-   config[key] = lsParams ? lsParams : params.default
+	const lsParams = localStorage.getItem(params.localStorage)
+	config[key] = lsParams ? lsParams : params.default
 }
 
 // Parse url params
 const parseUrl = () => {
 	const search = window.location.search.substring(1)
-	const params = search.split('&')
+	const params = search.split("&")
 
 	for (let i = 0; i < params.length; i++) {
-		const arr = params[i].split('=')
+		const arr = params[i].split("=")
 		const key = arr[0]
 		const value = arr[1]
 
@@ -36,22 +38,14 @@ const parseUrl = () => {
 // Toggle form controls
 const toggleFormControls = (form) => {
 	for (const [key, params] of Object.entries(items)) {
-		const elem = form.querySelector(`[name="settings-${key}"][value="${config[key]}"]`)
+		const elem = form.querySelector(
+			`[name="settings-${key}"][value="${config[key]}"]`,
+		)
 
 		if (elem) {
 			elem.checked = true
 		}
 	}
-}
-
-// Update body classes
-const updateBodyClasses = () => {
-	document.body.classList.remove('theme-dark', 'theme-light');
-	document.body.classList.add(`theme-${config.theme}`);
-
-	// for (const [key, params] of Object.entries(items)) {
-	// 	document.body.setAttribute(`data-${key}`, config[key]);
-	// }
 }
 
 // Submit form
@@ -66,28 +60,20 @@ const submitForm = (form) => {
 		config[key] = value
 	}
 
-	// Update body classes
-	updateBodyClasses();
+	window.dispatchEvent(new Event("resize"))
 
-	window.dispatchEvent(new Event('resize'));
-
-	(new bootstrap.Offcanvas(form)).hide()
+	new bootstrap.Offcanvas(form).hide()
 }
-
 
 // Parse url
 parseUrl()
 
-// Update body classes
-updateBodyClasses();
-
 // Elements
-const form = document.querySelector('#offcanvasSettings')
+const form = document.querySelector("#offcanvasSettings")
 
 // Toggle form controls
 if (form) {
-
-	form.addEventListener('submit', function (e) {
+	form.addEventListener("submit", function (e) {
 		e.preventDefault()
 
 		submitForm(form)
